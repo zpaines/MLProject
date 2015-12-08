@@ -1,0 +1,9 @@
+package main;
+
+public class DataImporter {
+	
+	public static ArrayList<HashMap<Integer, Double>> importData(String filename) {
+		
+	}
+
+}

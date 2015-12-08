@@ -1,0 +1,13 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Driver {
+	protected static ArrayList<HashMap<Integer, Integer>> r;
+	
+	public static void main(String[] args) {
+		
+		
+	}
+}
