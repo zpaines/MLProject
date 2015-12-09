@@ -1,0 +1,13 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class DataImporter {
+	
+	public static void importData(, String filename) {
+		//TODO: stub
+		Driver._r = new ArrayList<HashMap<Integer,Double>>();
+	}
+
+}

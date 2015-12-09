@@ -1,0 +1,28 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class DataImporter {
+	
+	public static void importData(String filename) {
+		//TODO: stub
+		Driver._M = 0;
+		Driver._N = 0;
+		Driver._UserIDs = new ArrayList<String>();
+		Driver._ItemIDs = new ArrayList<String>();
+		Driver._r = new ArrayList<HashMap<Integer,Double>>();
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+			System.err.println("FILE \""+filename+"\" NOT FOUND");
+			System.exit(0);;
+		}
+		
+	}
+
+}

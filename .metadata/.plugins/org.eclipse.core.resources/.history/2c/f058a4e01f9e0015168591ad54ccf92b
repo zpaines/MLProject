@@ -1,0 +1,22 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class DataImporter {
+	
+	public static void importData(String filename) {
+		//TODO: stub
+		Driver._M = 0;
+		Driver._N = 0;
+		Driver._UserIDs = new ArrayList<String>();
+		Driver._ItemIDs = new ArrayList<String>();
+		Driver._r = new ArrayList<HashMap<Integer,Double>>();
+		
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		
+	}
+
+}

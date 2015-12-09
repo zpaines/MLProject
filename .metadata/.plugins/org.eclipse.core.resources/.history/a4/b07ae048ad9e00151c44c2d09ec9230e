@@ -1,0 +1,20 @@
+package data_gen;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+/**
+ * Generate data based on connection matrix in text file.
+ * @author Derek
+ *
+ */
+public class GenMatrix {
+	public static final String readFileName = "data/trivial1.txt";
+
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader reader = new BufferedReader(new FileReader(readFileName));
+		
+		
+	}
+}

@@ -1,0 +1,12 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class DataImporter {
+	
+	public static void importData(ArrayList<HashMap<Integer, Double>> r, String filename) {
+		//TODO: stub
+	}
+
+}

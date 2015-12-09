@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public final class Driver {
-	public static final String DATA_FILE = "C://Users/Derek/My Documents/Million Song Data/train_triplets.txt";
+	public static final String DATA_FILE = //"C://Users/Derek/My Documents/Million Song Data/train_triplets.txt";
+			"data/trivial1.txt";
 	
 	/** Learning Params */
 	public static final int _f = 80;

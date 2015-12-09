@@ -1,0 +1,71 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class DataImporter {
+	
+	public static void importData(String filename) {
+		initGlobals();
+		
+		HashMap<String, Integer> Users = new HashMap<String, Integer>();
+		HashMap<String, Integer> Items = new HashMap<String, Integer>();
+		
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+			System.err.println("FILE \""+filename+"\" NOT FOUND");
+			System.exit(0);
+		}
+		
+		try {
+			String curLine;
+			String[] tokens;
+			int iTriple = 0;
+			while ((curLine = reader.readLine()) != null) {
+				if (iTriple%10000 == 0) 
+					System.out.println("loaded " + iTriple);
+				//curLine = reader.readLine();
+				tokens = curLine.split("\t");
+				
+				if (!Users.containsKey(tokens[0])) {
+					Users.put(tokens[0], Driver._M);
+					Driver._UserIDs.add(tokens[0]);
+					Driver._r.add(new HashMap<Integer, Double>());
+					Driver._M++;
+				}
+				
+				if (!Items.containsKey(tokens[1])) {
+					Items.put(tokens[1], Driver._N);
+					Driver._ItemIDs.add(tokens[1]);
+					Driver._N++;
+				}
+
+				Driver._r.get(Users.get(tokens[0])).put(
+						Items.get(tokens[1]),
+						Double.parseDouble(tokens[2]));
+				
+				iTriple ++;
+			}
+			
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+	
+	private static void initGlobals() {
+		Driver._M = 0;
+		Driver._N = 0;
+		Driver._UserIDs = new ArrayList<String>();
+		Driver._ItemIDs = new ArrayList<String>();
+		Driver._r = new ArrayList<HashMap<Integer,Double>>();
+	}
+
+}
