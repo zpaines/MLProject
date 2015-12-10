@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Recommender {
 
-	public int[] recommend(int u, int num_suggestions) {
+	public static int[] recommend(int u, int num_suggestions) {
 		ArrayList<Integer> items = new ArrayList<Integer>();
 		ArrayList<Double> vals = new ArrayList<Double>();
 		

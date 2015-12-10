@@ -11,7 +11,7 @@ public final class Driver {
 			"data/trivial1.txt";
 	
 	/** Learning Params */
-	public static final int _f = 80;
+	public static final int _f = 3;
 	public static final double _alpha = 1/20;
 	public static final int _iterations = 100;
 	
@@ -37,6 +37,9 @@ public final class Driver {
 		CostMinimizer.minCost();
 		
 		//TODO: recommend
+		int[] t = Recommender.recommend(0,1);
+		System.out.println(t[0]);
+		
 	}
 	
 	private static void printData() {
