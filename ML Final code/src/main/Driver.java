@@ -9,12 +9,13 @@ import Jama.Matrix;
 
 public final class Driver {
 	public static final String DATA_FILE = //"C://Users/Derek/My Documents/Million Song Data/train_triplets.txt";
-			"data/trivial1.txt";
+			"data/cycle5.txt";
 	
 	/** Learning Params */
-	public static final int _f = 3;
-	public static final double _alpha = 1/20;
-	public static final int _iterations = 100;
+	public static final int _f = 2;
+	public static final double _alpha = 1.0/20.0;
+	public static final int _iterations = 15;
+	public static final double _lambda = 0.01;
 	
 	/** Main Variables */
 	protected static int _M; //#users
@@ -38,7 +39,7 @@ public final class Driver {
 		CostMinimizer.minCost();
 		
 		//TODO: recommend
-		ArrayList<Pair<Integer, Double>> t = Recommender.recommend(0,2);
+		ArrayList<Pair<Integer, Double>> t = Recommender.recommend(0,3);
 		for (int i=0; i<t.size();i++) {
 			System.out.println("item ["+t.get(i).first + "] with value [" + t.get(i).second + "]");
 		}

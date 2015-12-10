@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  */
 public class GenMatrix {
-	public static final String fileName = "two_cycle.txt";
+	public static final String fileName = "trivial0.txt";
 	
 	public static String readFileName  = "pre-data/trivial1.txt";
 	public static String writeFileName =     "data/trivial1.txt";
