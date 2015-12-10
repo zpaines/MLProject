@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import Jama.Matrix;
+
 public final class Driver {
 	public static final String DATA_FILE = //"C://Users/Derek/My Documents/Million Song Data/train_triplets.txt";
 			"data/trivial1.txt";
@@ -19,8 +21,9 @@ public final class Driver {
 	protected static ArrayList<String> _UserIDs;
 	protected static ArrayList<String> _ItemIDs;
 	protected static ArrayList<HashMap<Integer, Double>> _r;
-	protected static ArrayList<Double[]> _X;
-	protected static ArrayList<Double[]> _Y;
+	protected static ArrayList<HashMap<Integer, Double>> _rt;
+	protected static Matrix _X;
+	protected static Matrix _Y;
 	
 	public static void main(String[] args) {
 		
@@ -30,6 +33,8 @@ public final class Driver {
 		
 		//TODO: @Zach fill this out to match the signature you want
 		//Trainer.trainModel()
+		
+		CostMinimizer.minCost();
 		
 		//TODO: recommend
 	}
