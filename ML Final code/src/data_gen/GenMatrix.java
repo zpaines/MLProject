@@ -12,16 +12,17 @@ import java.io.IOException;
  *
  */
 public class GenMatrix {
-	public static final String readFileName  = "pre-data/trivial1.txt";
-	public static final String writeFileName =     "data/trivial1.txt";
+	public static final String fileName = "two_cycle.txt";
+	
+	public static String readFileName  = "pre-data/trivial1.txt";
+	public static String writeFileName =     "data/trivial1.txt";
 
 	public static void main(String[] args) throws IOException {
+		readFileName = "pre-data/"+fileName;
+		writeFileName= "data/"+fileName;
 		
 		BufferedReader reader = new BufferedReader(new FileReader(readFileName));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(writeFileName));
-		writer.close();
-		reader.close();
-		System.exit(0);
 		
 		String curLine;
 		String tokens[];
@@ -30,8 +31,11 @@ public class GenMatrix {
 			tokens = curLine.split(" ");
 			
 			for (int i=0; i<tokens.length; i++) {
-				System.out.println("" + u + " " + i + " " + tokens[i]);
-				writer.write("" + u + " " + i + " " + tokens[i]);
+				if (tokens[i].equals("0")) {
+					continue;
+				}
+				//System.out.println("" + u + " " + i + " " + tokens[i]);
+				writer.write("" + u + "\t" + i + "\t" + tokens[i]);
 				writer.newLine();
 			}
 			

@@ -51,9 +51,7 @@ public class DataImporter {
 				Driver._r.get(Users.get(tokens[0])).put(
 						Items.get(tokens[1]),
 						Double.parseDouble(tokens[2]));
-				Driver._rt.get(Items.get(tokens[1])).put(
-						Users.get(tokens[0]),
-						Double.parseDouble(tokens[2]));
+				Driver.rt.get(Items.get(tokens[1])).
 				
 				iTriple ++;
 			}
