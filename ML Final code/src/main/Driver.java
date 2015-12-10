@@ -38,7 +38,7 @@ public final class Driver {
 		CostMinimizer.minCost();
 		
 		//TODO: recommend
-		ArrayList<Pair<Integer, Double>> t = Recommender.recommend(0,1);
+		ArrayList<Pair<Integer, Double>> t = Recommender.recommend(0,2);
 		for (int i=0; i<t.size();i++) {
 			System.out.println("item ["+t.get(i).first + "] with value [" + t.get(i).second + "]");
 		}

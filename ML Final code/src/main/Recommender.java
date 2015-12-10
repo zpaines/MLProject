@@ -38,10 +38,10 @@ public class Recommender {
 		ArrayList<Pair<Integer, Double>> ans = new ArrayList<Pair<Integer, Double>>();
 		int item_idx = 0;
 		for (; item_idx < items.size(); item_idx++) {
-			ans.set(item_idx, new Pair<Integer, Double>(items.get(item_idx), vals.get(item_idx)));
+			ans.add(new Pair<Integer, Double>(items.get(item_idx), vals.get(item_idx)));
 		}
 		for (; item_idx < num_suggestions; item_idx++) {
-			ans.set(item_idx, new Pair<Integer, Double>(-1, -1.0/0.0));
+			ans.add(new Pair<Integer, Double>(-1, -1.0/0.0));
 		}
 		
 		return ans;
