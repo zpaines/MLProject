@@ -2,10 +2,12 @@ package main;
 
 import java.util.ArrayList;
 
+import utilities.Pair;
+
 
 public class Recommender {
 
-	public static int[] recommend(int u, int num_suggestions) {
+	public static ArrayList<Pair<Integer, Double>> recommend(int u, int num_suggestions) {
 		ArrayList<Integer> items = new ArrayList<Integer>();
 		ArrayList<Double> vals = new ArrayList<Double>();
 		
@@ -33,13 +35,13 @@ public class Recommender {
 			}
 		}
 		
-		int[] ans = new int[num_suggestions];
+		ArrayList<Pair<Integer, Double>> ans = new ArrayList<Pair<Integer, Double>>();
 		int item_idx = 0;
 		for (; item_idx < items.size(); item_idx++) {
-			ans[item_idx] = items.get(item_idx);
+			ans.set(item_idx, new Pair<Integer, Double>(items.get(item_idx), vals.get(item_idx)));
 		}
 		for (; item_idx < num_suggestions; item_idx++) {
-			ans[item_idx] = -1;
+			ans.set(item_idx, new Pair<Integer, Double>(-1, -1.0/0.0));
 		}
 		
 		return ans;

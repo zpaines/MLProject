@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import utilities.Pair;
 import Jama.Matrix;
 
 public final class Driver {
@@ -37,8 +38,10 @@ public final class Driver {
 		CostMinimizer.minCost();
 		
 		//TODO: recommend
-		int[] t = Recommender.recommend(0,1);
-		System.out.println(t[0]);
+		ArrayList<Pair<Integer, Double>> t = Recommender.recommend(0,1);
+		for (int i=0; i<t.size();i++) {
+			System.out.println("item ["+t.get(i).first + "] with value [" + t.get(i).second + "]");
+		}
 		
 	}
 	
