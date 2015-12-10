@@ -71,6 +71,7 @@ public class DataImporter {
 		Driver._UserIDs = new ArrayList<String>();
 		Driver._ItemIDs = new ArrayList<String>();
 		Driver._r = new ArrayList<HashMap<Integer,Double>>();
+		Driver._rt = new ArrayList<HashMap<Integer,Double>>();
 	}
 
 }
