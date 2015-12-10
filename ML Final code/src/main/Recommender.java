@@ -14,7 +14,8 @@ public class Recommender {
 			if (Driver._r.get(u).containsKey(i))
 				continue;
 			
-			tVal = Driver._X.row(u).dot(Driver._Y.row(i));
+			tVal = Driver._X.getMatrix(u, u, 0, Driver._N-1).transpose().times(
+					Driver._Y.getMatrix(i, i, 0, Driver._M-1)).get(0, 0);
 			
 			int idx = 0;
 			for (; idx<items.size(); idx++) {
@@ -32,6 +33,15 @@ public class Recommender {
 			}
 		}
 		
+		int[] ans = new int[num_suggestions];
+		int item_idx = 0;
+		for (; item_idx < items.size(); item_idx++) {
+			ans[item_idx] = items.get(item_idx);
+		}
+		for (; item_idx < num_suggestions; item_idx++) {
+			ans[item_idx] = -1;
+		}
 		
+		return ans;
 	}
 }
