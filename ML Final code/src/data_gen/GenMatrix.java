@@ -31,8 +31,11 @@ public class GenMatrix {
 			tokens = curLine.split(" ");
 			
 			for (int i=0; i<tokens.length; i++) {
+				if (tokens[i].equals("0")) {
+					continue;
+				}
 				//System.out.println("" + u + " " + i + " " + tokens[i]);
-				writer.write("" + u + " " + i + " " + tokens[i]);
+				writer.write("" + u + "\t" + i + "\t" + tokens[i]);
 				writer.newLine();
 			}
 			
