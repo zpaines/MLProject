@@ -32,8 +32,8 @@ public class CostMinimizer {
     int count = 0;
     double lambda = Driver._lambda;
     
-    Matrix lambdaI1 = new Matrix(Driver._Y.getColumnDimension(), Driver._Y.getColumnDimension(), lambda);
-    Matrix lambdaT2 = new Matrix(Driver._X.getColumnDimension(), Driver._X.getColumnDimension(), lambda);    
+    Matrix lambdaI1 = Matrix.identity(Driver._Y.getColumnDimension(), Driver._Y.getColumnDimension()).times(Driver._lambda);  //Driver_Y.getColumnDimension
+    Matrix lambdaT2 = Matrix.identity(Driver._X.getColumnDimension(), Driver._X.getColumnDimension()).times(Driver._lambda);  //Driver_ 
     Matrix Ii = new Matrix(Driver._M, Driver._M, 1);
     Matrix Iu = new Matrix(Driver._N, Driver._N, 1);
     while (!converged) {
