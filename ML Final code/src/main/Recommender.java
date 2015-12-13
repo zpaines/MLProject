@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+import Jama.Matrix;
 import utilities.Pair;
 
 
@@ -10,7 +11,7 @@ public class Recommender {
 	public static ArrayList<Pair<String, Double>> recommend(String userID, int num_suggestions) {
 		int u = Driver._UserIDs.indexOf(userID);
 		
-		ArrayList<Integer> items = new ArrayList<Integer>();
+		/*ArrayList<Integer> items = new ArrayList<Integer>();
 		ArrayList<Double> vals = new ArrayList<Double>();
 		
 		double tVal;
@@ -44,6 +45,26 @@ public class Recommender {
 		}
 		for (; item_idx < num_suggestions; item_idx++) {
 			ans.add(new Pair<String, Double>("n/a", -1.0/0.0));
+		}
+		
+		return ans;*/
+		
+		Matrix Xu = Driver._X.getMatrix(u,u,0,Driver._f-1).transpose();
+		
+		ArrayList<Pair<String, Double>> ans = new ArrayList<Pair<String, Double>>();
+		for (int i=0 ;i<Driver._N; i++) {
+			if (Driver._r.contains(i)) {
+				continue;
+			}
+			double val = Xu.times(Driver._Y.getMatrix(i, i, 0, Driver._f-1)).get(0, 0);
+			int idx=0;
+			for (; idx<ans.size(); idx++) {
+				if (val > ans.get(idx).second) {
+					break;
+				}
+			}
+			
+			ans.add(idx, new Pair<String, Double>(""+i, val));
 		}
 		
 		return ans;
