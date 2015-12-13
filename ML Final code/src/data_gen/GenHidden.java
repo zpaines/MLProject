@@ -9,5 +9,16 @@ package data_gen;
  *
  */
 public class GenHidden {
+	public static final int _M = 80;
+	public static final int _N = 55;
+	public static final int _f = 3;
+	
+	public static void main(String[] args) {
+		String filename = _M+"x"+_N+"x"+_f+".txt";
+		IdealCreator creator = new IdealCreator(_M, _N, _f, filename);
+		creator.create();
+		
+		System.out.println("Done!");
+	}
 
 }
