@@ -45,18 +45,37 @@ public class IdealCreator {
 			}
 		}
 		
+		
+		
 		try {
+			BufferedWriter data_writer = new BufferedWriter(new FileWriter("data/"+this._filename));
 			BufferedWriter predata_writer = new BufferedWriter(new FileWriter("pre-data/"+this._filename));
 			
 			for (int u=0; u<_M; u++) {
-				predata_writer.write(""+u+":");
+				for (int i=0; i<_N; i++) {
+					
+					double prod = X.getMatrix(u, u, 0, _f-1).transpose().times(
+							Y.getMatrix(i, i, 0, _f-1)).get(0,0);
+					if (connect(prod, rand)) {
+						data_writer.write("" + u + "\t" + i + "\t" + prod);
+						data_writer.newLine();
+						predata_writer.write("" + u + "\t" + i + "\t" + prod);
+						predata_writer.newLine();
+					}
+				}
+			}
+			
+			data_writer.close();
+			
+			predata_writer.write(_M+" "+_N+" "+_f);
+			predata_writer.newLine();
+			
+			for (int u=0; u<_M; u++) {
 				for (int k=0; k<_f; k++) {
 					predata_writer.write(""+X.get(u, k)+" ");
 				}
 				predata_writer.newLine();
 			}
-			
-			predata_writer.newLine();
 			
 			for (int i=0; i<_N; i++) {
 				predata_writer.write(i+":");
@@ -67,28 +86,6 @@ public class IdealCreator {
 			}
 			
 			predata_writer.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		try {
-			BufferedWriter data_writer = new BufferedWriter(new FileWriter("data/"+this._filename));
-			
-			for (int u=0; u<_M; u++) {
-				for (int i=0; i<_N; i++) {
-					
-					double prod = X.getMatrix(u, u, 0, _f-1).transpose().times(
-							Y.getMatrix(i, i, 0, _f-1)).get(0,0);
-					if (connect(prod, rand)) {
-						data_writer.write("" + u + "\t" + i + "\t" + prod);
-						data_writer.newLine();
-					}
-				}
-			}
-			
-			data_writer.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

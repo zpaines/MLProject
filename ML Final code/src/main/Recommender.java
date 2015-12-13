@@ -7,7 +7,9 @@ import utilities.Pair;
 
 public class Recommender {
 
-	public static ArrayList<Pair<String, Double>> recommend(int u, int num_suggestions) {
+	public static ArrayList<Pair<String, Double>> recommend(String userID, int num_suggestions) {
+		int u = Driver._UserIDs.indexOf(userID);
+		
 		ArrayList<Integer> items = new ArrayList<Integer>();
 		ArrayList<Double> vals = new ArrayList<Double>();
 		
