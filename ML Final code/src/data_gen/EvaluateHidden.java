@@ -74,6 +74,10 @@ public class EvaluateHidden {
 			
 			ans.add(idx, new Pair<String, Double>(""+i, val));
 		}
+	
+		for (int item : Cu) {
+			System.out.println("Cu contains " + item);
+		}
 		
 		return ans;
 		

@@ -57,6 +57,10 @@ public final class Driver {
       }
 		System.out.println(ListSimilarity.basicDifference(s, s2));
 		
+		for (int i=0; i<s.size(); i++) {
+			System.out.println(s.get(i) + "\t" + s2.get(i));
+		}
+		
 	}
 	
 	private static void printData() {

@@ -53,7 +53,7 @@ public class Recommender {
 		
 		ArrayList<Pair<String, Double>> ans = new ArrayList<Pair<String, Double>>();
 		for (int i=0 ;i<Driver._N; i++) {
-			if (Driver._r.contains(i)) {
+			if (Driver._r.get(u).containsKey(i)) {
 				continue;
 			}
 			double val = Xu.times(Driver._Y.getMatrix(i, i, 0, Driver._f-1)).get(0, 0);
@@ -64,7 +64,7 @@ public class Recommender {
 				}
 			}
 			
-			ans.add(idx, new Pair<String, Double>(""+i, val));
+			ans.add(idx, new Pair<String, Double>(""+Driver._ItemIDs.get(i), val));
 		}
 		
 		return ans;
