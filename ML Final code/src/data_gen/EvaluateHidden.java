@@ -31,7 +31,6 @@ public class EvaluateHidden {
 		}
 		
 		
-		curLine = reader.readLine();
 		tokens = curLine.split(" ");
 		M = Integer.parseInt(tokens[0]);
 		N = Integer.parseInt(tokens[1]);
