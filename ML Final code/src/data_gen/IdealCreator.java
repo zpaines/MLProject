@@ -78,7 +78,6 @@ public class IdealCreator {
 			}
 			
 			for (int i=0; i<_N; i++) {
-				predata_writer.write(i+":");
 				for (int k=0; k<_f; k++) {
 					predata_writer.write(Y.get(i, k) + " ");
 				}

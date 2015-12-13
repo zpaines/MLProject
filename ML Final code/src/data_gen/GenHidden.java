@@ -9,9 +9,9 @@ package data_gen;
  *
  */
 public class GenHidden {
-	public static final int _M = 120;
-	public static final int _N = 70;
-	public static final int _f = 10;
+	public static final int _M = 90;
+	public static final int _N = 60;
+	public static final int _f = 7;
 	
 	public static void main(String[] args) {
 		String filename = _M+"x"+_N+"x"+_f+".txt";
