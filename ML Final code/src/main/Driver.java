@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import data_gen.EvaluateHidden;
+import utilities.ListSimilarity;
 import utilities.Pair;
 import Jama.Matrix;
 
@@ -41,15 +42,21 @@ public final class Driver {
 		CostMinimizer.minCost();
 		
 		//TODO: recommend
-		ArrayList<Pair<String, Double>> t = Recommender.recommend("0",20);
+		ArrayList<Pair<String, Double>> t = Recommender.recommend("0",60);
+		ArrayList<String> s = new ArrayList<String>();
 		for (int i=0; i<t.size();i++) {
 			System.out.println("item ["+t.get(i).first + "] with value [" + t.get(i).second + "]");
+			s.add(t.get(i).first);
 		}
 		System.out.println("*****************************");
-		t = EvaluateHidden.recommend("pre-data/90x60x7.txt",0,20);
-        for (int i=0; i<t.size();i++) {
-            System.out.println("item ["+t.get(i).first + "] with value [" + t.get(i).second + "]");
-        }
+		ArrayList<Pair<String,Double>> t2 = EvaluateHidden.recommend("pre-data/90x60x7.txt",0,60);
+		ArrayList<String> s2 = new ArrayList<String>();
+		for (int i=0; i<t2.size();i++) {
+          System.out.println("item ["+t2.get(i).first + "] with value [" + t2.get(i).second + "]");
+          s2.add(t2.get(i).first);
+      }
+		System.out.println(ListSimilarity.basicDifference(s, s2));
+		
 	}
 	
 	private static void printData() {
