@@ -7,7 +7,7 @@ import utilities.Pair;
 
 public class Recommender {
 
-	public static ArrayList<Pair<Integer, Double>> recommend(int u, int num_suggestions) {
+	public static ArrayList<Pair<String, Double>> recommend(int u, int num_suggestions) {
 		ArrayList<Integer> items = new ArrayList<Integer>();
 		ArrayList<Double> vals = new ArrayList<Double>();
 		
@@ -35,13 +35,13 @@ public class Recommender {
 			}
 		}
 		
-		ArrayList<Pair<Integer, Double>> ans = new ArrayList<Pair<Integer, Double>>();
+		ArrayList<Pair<String, Double>> ans = new ArrayList<Pair<String, Double>>();
 		int item_idx = 0;
 		for (; item_idx < items.size(); item_idx++) {
-			ans.add(new Pair<Integer, Double>(items.get(item_idx), vals.get(item_idx)));
+			ans.add(new Pair<String, Double>(Driver._ItemIDs.get(items.get(item_idx)), vals.get(item_idx)));
 		}
 		for (; item_idx < num_suggestions; item_idx++) {
-			ans.add(new Pair<Integer, Double>(-1, -1.0/0.0));
+			ans.add(new Pair<String, Double>("n/a", -1.0/0.0));
 		}
 		
 		return ans;
