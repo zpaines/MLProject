@@ -73,7 +73,7 @@ public class EvaluateHidden {
 				}
 			}
 			
-			ans.add(idx, new Pair<String, Double>(""+user, val));
+			ans.add(idx, new Pair<String, Double>(""+i, val));
 		}
 		
 		return ans;
