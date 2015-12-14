@@ -33,7 +33,7 @@ public class CostMinimizer {
     double lambda = Driver._lambda;
     
     Matrix lambdaI1 = Matrix.identity(Driver._Y.getColumnDimension(), Driver._Y.getColumnDimension()).times(Driver._lambda);  //Driver_Y.getColumnDimension
-    Matrix lambdaT2 = Matrix.identity(Driver._X.getColumnDimension(), Driver._X.getColumnDimension()).times(Driver._lambda);  //Driver_ 
+    Matrix lambdaI2 = Matrix.identity(Driver._X.getColumnDimension(), Driver._X.getColumnDimension()).times(Driver._lambda);  //Driver_ 
     Matrix Ii = new Matrix(Driver._M, Driver._M, 1);
     Matrix Iu = new Matrix(Driver._N, Driver._N, 1);
     while (!converged) {
@@ -47,11 +47,10 @@ public class CostMinimizer {
       Matrix xT = Driver._X.transpose();
       Matrix XX = xT.times(Driver._X);
       
-      for (int i=0; i<Driver._Y.getRowDimension(); i++) {
-        Matrix C = new Matrix(createcSquarei(i));//.minus(Ii);
-        Matrix XtCI = xT.times(C).times(Driver._X).plus(lambdaT2);
+      for (int i=0; i< Driver._Y.getRowDimension(); i++) {
+        Matrix XtCI = computeXtC(xT, i).times(Driver._X).plus(lambdaI2);
         Matrix inverted = XX.plus(XtCI).inverse();
-        Matrix Yu = inverted.times(xT).times(C).times(new Matrix(computePi(i)));
+        Matrix Yu = multiplyCi(inverted.times(xT), i).times(new Matrix(computePi(i)));
         Driver._Y.setMatrix(i,i, 0, Driver._Y.getColumnDimension()-1, Yu.transpose());
       }
       
@@ -64,20 +63,11 @@ public class CostMinimizer {
       Matrix YY = yT.times(Driver._Y);
             
       for (int u=0; u<Driver._X.getRowDimension(); u++) {
-        Matrix C = new Matrix(createcSquareu(u));//.minus(Iu);
-        Matrix t2 = yT.times(C);
-        Matrix t = t2.times(Driver._Y);
-        Matrix YtCI = t.plus(lambdaI1);
-        Matrix a = YY.plus(YtCI);
-       /* for (int y = 0; y<a.getRowDimension(); y++) {
-          for (int x=0; x<a.getColumnDimension(); x++) {
-            System.out.print(a.get(y, x) + ",");
-          }
-          System.out.println();
-        }*/
+        Matrix YtCI = computeYtC(yT, u).times(Driver._Y);
+        Matrix a = YY.plus(YtCI).plus(lambdaI1);
         Matrix inverted = a.inverse();
         Matrix p = new Matrix(computePu(u));
-        Matrix Xu = inverted.times(yT).times(C).times(p);
+        Matrix Xu = multiplyCu(inverted.times(yT), u).times(p);
         Driver._X.setMatrix(u,u, 0, Driver._X.getColumnDimension()-1, Xu.transpose());
       }
     
@@ -159,7 +149,54 @@ public class CostMinimizer {
   return res;
   }
   
-  private static double computeConfidence(double rValue) {
+  private static Matrix computeYtC(Matrix yT, int u) {
+    double[][] YtCu = new double[Driver._f][Driver._N];
+    HashMap<Integer, Double> user = Driver._r.get(u);
+    for (int row = 0; row < Driver._f; row++) {
+      for (int col=0; col < Driver._N; col++) {
+        YtCu[row][col] = yT.get(row, col) * (computeConfidence(user.get(col)) - 1);
+      }
+    }
+    return new Matrix(YtCu);
+  }
+  
+  private static Matrix computeXtC(Matrix xT, int i) {
+    double[][] XtCu = new double[Driver._f][Driver._M];
+    HashMap<Integer, Double> item = Driver._rt.get(i);
+    for (int row = 0; row < Driver._f; row++) {
+      for (int col=0; col < Driver._N; col++) {
+        XtCu[row][col] = xT.get(row, col) * (computeConfidence(item.get(col)) - 1);
+      }
+    }
+    return new Matrix(XtCu);
+  }
+  
+  private static Matrix multiplyCu(Matrix multiplied, int u) {
+    double[][] result = new double[multiplied.getRowDimension()][multiplied.getColumnDimension()];
+    HashMap<Integer, Double> user = Driver._r.get(u);
+    for (int row = 0; row < multiplied.getRowDimension(); row++) {
+      for (int col=0; col < multiplied.getColumnDimension(); col++) {
+        result[row][col] = multiplied.get(row, col) * (computeConfidence(user.get(col)) - 1);
+      }
+    }
+    return new Matrix(result);
+   }
+  
+  private static Matrix multiplyCi(Matrix multiplied, int i) {
+    double[][] result = new double[multiplied.getRowDimension()][multiplied.getColumnDimension()];
+    HashMap<Integer, Double> item = Driver._rt.get(i);
+    for (int row = 0; row < multiplied.getRowDimension(); row++) {
+      for (int col=0; col < multiplied.getColumnDimension(); col++) {
+        result[row][col] = multiplied.get(row, col) * (computeConfidence(item.get(col)) - 1);
+      }
+    }
+    return new Matrix(result);
+  }
+  
+  private static double computeConfidence(Double rValue) {
+    if (rValue == null) {
+      return 1;
+    }
     return 1 + Driver._alpha*rValue;
   }
   
